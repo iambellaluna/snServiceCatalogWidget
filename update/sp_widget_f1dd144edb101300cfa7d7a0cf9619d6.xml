@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function() {  /* widget controller */  var c = this;}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tableData {
+	width= "16%";
+  text-align: center;
+  padding:5px;
+}
+
+.notSelected{
+  border: 0px solid #ffffff;
+  border-radius: 68px;
+  padding: 0px;
+}
+
+.selected{
+  color:red;
+}
+
+i{
+  font-size:75pt;
+}
+
+button{
+  background:none;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>buttonswidg</id>
+        <internal>false</internal>
+        <link/>
+        <name>ButtonsWidg</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-16 15:58:54</sys_created_on>
+        <sys_id>f1dd144edb101300cfa7d7a0cf9619d6</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>ButtonsWidg</sys_name>
+        <sys_package display_value="ButtonWidget" source="x_106955_buttonwid">9ec81006db101300cfa7d7a0cf96199c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ButtonWidget">9ec81006db101300cfa7d7a0cf96199c</sys_scope>
+        <sys_update_name>sp_widget_f1dd144edb101300cfa7d7a0cf9619d6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-16 16:03:28</sys_updated_on>
+        <template><![CDATA[<div>
+  <table>
+    <tr>
+    <td class="tableData">
+      <button class="notSelected">
+        <i class='fa fa-check' />
+      </button>
+      <div>
+         This is an example of a checkbox.
+      </div>
+      </td>
+    </tr>
+  </table>
+</div>  ]]></template>
+    </sp_widget>
+</record_update>
