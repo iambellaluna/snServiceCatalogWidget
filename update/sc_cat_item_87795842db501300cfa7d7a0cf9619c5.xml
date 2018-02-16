@@ -13,6 +13,7 @@
         <description><![CDATA[<p><a title="Link" href="/sp?id&#61;sc_cat_item&amp;sys_id&#61;87795842db501300cfa7d7a0cf9619c5&amp;sysparm_category&#61;569b9482db501300e00ddd30cf961948" rel="nofollow">Link</a></p>]]></description>
         <entitlement_script/>
         <group/>
+        <hide_sp>false</hide_sp>
         <icon/>
         <ignore_price>true</ignore_price>
         <image/>
