@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sc_cat_item_catalog">
+    <sc_cat_item_catalog action="INSERT_OR_UPDATE">
+        <sc_cat_item display_value="Example Form">87795842db501300cfa7d7a0cf9619c5</sc_cat_item>
+        <sc_catalog display_value="Service Catalog">e0d08b13c3330100c8b837659bba8fb4</sc_catalog>
+        <sys_class_name>sc_cat_item_catalog</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-02-16 15:49:28</sys_created_on>
+        <sys_id>dfab9482db501300e00ddd30cf961950</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Service Catalog.Example Form</sys_name>
+        <sys_package display_value="ButtonWidget" source="x_106955_buttonwid">9ec81006db101300cfa7d7a0cf96199c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ButtonWidget">9ec81006db101300cfa7d7a0cf96199c</sys_scope>
+        <sys_update_name>sc_cat_item_catalog_dfab9482db501300e00ddd30cf961950</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-02-16 15:49:28</sys_updated_on>
+    </sc_cat_item_catalog>
+</record_update>
