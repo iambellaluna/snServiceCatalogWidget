@@ -1,8 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
-        <category/>
-        <client_script><![CDATA[function() {  /* widget controller */  var c = this;}]]></client_script>
+        <client_script><![CDATA[function($scope) {
+	//This is the controller, we've included $scope in the function above because it's easy to work with
+	var c = this;
+	
+	//We are going to simplify accessing g_form within the client script by setting it as a variable named g_form
+	var g_form = $scope.page.g_form;
+	//We are going to simplify accessing g_form within the HTML by setting it as a $scope attribute
+	$scope.g_form = $scope.page.g_form;
+	//Here we are going to create a new function
+	$scope.getData = function(varid, varname){
+		//Now we are going to call the server with action of getData to fetch the variable data
+		c.server.get({action:'getData', variableid:varid, variablename:varname}).then(function(r) {
+			//$scope.checks will be used in the HTML to render the display
+			$scope.checks = r.data.vars;
+			//Now we will loop through all the variables that were returned and hide the OOB checkboxes
+			for(var i in r.data.vars){
+				g_form.setVisible(r.data.vars[i].name, false);
+			}
+		});
+	};
+	//This is a function that will allow the HTML to invert whatever the checkbox is currently set to
+	$scope.setCheckbox = function(varname){
+		//This converts the string value to a boolean for easier inversion
+		var val = (g_form.getValue(varname) == "true");
+		//Set the inverted value from a boolean to a string because SNow
+		g_form.setValue(varname, (!val).toString());
+	};
+	//On page load execute getData. There maybe a better way to do this but this is what we came up with
+	$scope.getData($scope.page.field.sys_id, $scope.page.field.variable_name);
+}]]></client_script>
         <controller_as>c</controller_as>
         <css>.tableData {
 	width= "16%";
@@ -14,10 +42,6 @@
   border: 0px solid #ffffff;
   border-radius: 68px;
   padding: 0px;
-}
-
-.selected{
-  color:red;
 }
 
 i{
@@ -40,29 +64,79 @@ button{
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <script><![CDATA[(function() {
+	//First we are going to create data.vars as an array so we can push data into it later
+	data.vars = [];
+	
+	//Next we are going to create input actions on the server so the client can make calls to the server
+	if(input){
+		//This next check is to limit what activies the service performs based on the action specified in the client script.
+		//If you did not specify the action the server would just run everything in the server script
+		if(input.action == 'getData'){
+			//Next we will glide out to retrieve the variables that match the macro's name
+			var datagr = new GlideRecord("item_option_new");
+			
+			//In the encoded query below we will be pulling the catalog ID from the url and the macro name from the input parameters
+			datagr.addEncodedQuery('cat_item=' + $sp.getParameter('sys_id') + '^active=true^attributesLIKEbutton_widget=' + input.variablename);
+			//The next line it to position the variables in the correct order
+			datagr.orderBy('order');
+			//Run the query
+			datagr.query();
+			
+			//Now we will step through the results to retreieve the relevant attributes
+			while(datagr.next()){
+				//This variable is to set the default font awesome icon if one is not set
+				var iconval = 'fa-check';
+				//This variable is to create an array of the attributes attached to the variable
+				var attrib = datagr.attributes.toString().split(';');
+				
+				//This next loop is to search through all of the attributes and find the icon value if present
+				for(var i in attrib){
+					if(attrib[i].indexOf('icon=') >= 0){
+						iconval = attrib[i].replace('icon=', '');
+						break;
+					}
+				}
+				
+				//Now we are going to push the attributes as a JSON object into data.vars for client consumption
+				data.vars.push({
+					"name" : datagr.name.toString(),
+					"icon" : iconval,
+					"displayname" : datagr.question_text.toString()
+				});
+			}
+		}
+		
+	}
+})();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-02-16 15:58:54</sys_created_on>
         <sys_id>f1dd144edb101300cfa7d7a0cf9619d6</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>ButtonsWidg</sys_name>
         <sys_package display_value="ButtonWidget" source="x_106955_buttonwid">9ec81006db101300cfa7d7a0cf96199c</sys_package>
         <sys_policy/>
         <sys_scope display_value="ButtonWidget">9ec81006db101300cfa7d7a0cf96199c</sys_scope>
         <sys_update_name>sp_widget_f1dd144edb101300cfa7d7a0cf9619d6</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-02-16 16:03:28</sys_updated_on>
+        <sys_updated_on>2018-02-23 20:18:53</sys_updated_on>
         <template><![CDATA[<div>
   <table>
     <tr>
-    <td class="tableData">
-      <button class="notSelected">
-        <i class='fa fa-check' />
+      <!--On the next line we are calling ng-repeat which will loop through $scope.checks and creates all the html elements contained in the <td> it is on -->
+   <!--check ends up being our new variable on each iteration -->
+      <td ng-repeat="check in checks" class="tableData">
+        <!--Here we are going to add ng-click to call our setCheckbox function when the button is clicked. If you recall this will invert the value of the checkbox variable-->
+ 				<!--We are also calling ng-class which will set the class 'text-primary' when the variable value is true-->
+      <button class="notSelected" ng-click="setCheckbox(check.name)" ng-class="{'text-primary':g_form.getValue(check.name)=='true'}">
+       <!--Then we are going to specify the font awesome class. Since you can specify the icon you can use on a per variable basis, we are using ng-class to set the icon -->
+        <i class='fa' ng-class='[check.icon]'/>
       </button>
       <div>
-         This is an example of a checkbox.
+        <!--Here we are rendering the display name of the variable -->
+        {{check.displayname}}
       </div>
       </td>
     </tr>
