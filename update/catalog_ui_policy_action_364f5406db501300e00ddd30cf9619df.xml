@@ -9,11 +9,13 @@
         <sys_class_name>catalog_ui_policy_action</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-02-16 16:05:25</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>364f5406db501300e00ddd30cf9619df</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>praise_who</sys_name>
         <sys_package display_value="ButtonWidget" source="x_106955_buttonwid">9ec81006db101300cfa7d7a0cf96199c</sys_package>
         <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="ButtonWidget">9ec81006db101300cfa7d7a0cf96199c</sys_scope>
         <sys_update_name>catalog_ui_policy_action_364f5406db501300e00ddd30cf9619df</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>

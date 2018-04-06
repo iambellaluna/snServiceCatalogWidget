@@ -5,7 +5,6 @@
         <applies_catalog>true</applies_catalog>
         <applies_req_item>false</applies_req_item>
         <applies_sc_task>false</applies_sc_task>
-        <applies_target_record>false</applies_target_record>
         <applies_to>item</applies_to>
         <catalog_conditions>IO:9bbd1482db501300e00ddd30cf961999=true^EQ</catalog_conditions>
         <catalog_item display_value="Example Form">87795842db501300cfa7d7a0cf9619c5</catalog_item>
@@ -30,14 +29,15 @@
         <sys_class_name>catalog_ui_policy</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-02-16 16:05:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
         <sys_domain>global</sys_domain>
-        <sys_domain_path>/</sys_domain_path>
         <sys_id>575f9406db501300e00ddd30cf9619c8</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>Show Complain</sys_name>
         <sys_overrides/>
         <sys_package display_value="ButtonWidget" source="x_106955_buttonwid">9ec81006db101300cfa7d7a0cf96199c</sys_package>
         <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="ButtonWidget">9ec81006db101300cfa7d7a0cf96199c</sys_scope>
         <sys_update_name>catalog_ui_policy_575f9406db501300e00ddd30cf9619c8</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
